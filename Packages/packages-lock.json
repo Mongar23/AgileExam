@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.mbevers.core": {
+      "version": "file:E:/MyFramework/Packages/MBevers-Core",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.ext.nunit": {
       "version": "1.0.6",
       "depth": 1,

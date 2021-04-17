@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.mbevers.core": "file:E:/MyFramework/Packages/MBevers-Core",
     "com.unity.ide.rider": "2.0.7",
     "com.unity.test-framework": "1.1.24",
     "com.unity.textmeshpro": "3.0.4",
