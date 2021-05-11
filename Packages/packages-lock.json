@@ -6,6 +6,13 @@
       "source": "local",
       "dependencies": {}
     },
+    "com.prastiwar.unityserializeddictionary": {
+      "version": "https://github.com/Prastiwar/UnitySerializedDictionary.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "769342ef7b1d9073eb38e13af068b9ec90d0c190"
+    },
     "com.unity.ext.nunit": {
       "version": "1.0.6",
       "depth": 1,
@@ -41,7 +48,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.textmeshpro": {
-      "version": "3.0.4",
+      "version": "3.0.6",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -86,6 +93,13 @@
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
+    },
+    "com.vladfaust.unitywakatime": {
+      "version": "https://github.com/vladfaust/unity-wakatime.git#package",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "4dedbeac2e2d61c5c892e517728d2c4c74ce0acc"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
