@@ -1,15 +1,14 @@
 {
   "dependencies": {
     "com.mbevers.core": "file:E:/MyFramework/Packages/MBevers-Core",
+    "com.mbevers.menus": "file:E:/MyFramework/Packages/MBevers-Menus",
     "com.prastiwar.unityserializeddictionary": "https://github.com/Prastiwar/UnitySerializedDictionary.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.ide.rider": "2.0.7",
     "com.unity.test-framework": "1.1.24",
     "com.unity.textmeshpro": "3.0.6",
-    "com.unity.timeline": "1.4.7",
+    "com.unity.timeline": "1.4.8",
     "com.unity.ugui": "1.0.0",
-    "com.unity.ui": "1.0.0-preview.14",
-    "com.unity.ui.builder": "1.0.0-preview.14",
     "com.vladfaust.unitywakatime": "https://github.com/vladfaust/unity-wakatime.git#package",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
