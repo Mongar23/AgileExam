@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using MBevers.Menus;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using VeiligWerken.Menus;
 
 namespace Prototyping
 {
@@ -10,7 +12,7 @@ namespace Prototyping
 
         private void OnGUI()
         {
-            if(GUI.Button(new Rect(10, Screen.height - buttonSize.y * 0.1f - buttonSize.y, buttonSize.x, buttonSize.y), "Reload scene")) { SceneManager.LoadScene(1); }
+            if(GUI.Button(new Rect(new Vector2(10, Screen.height - buttonSize.y * 0.1f - buttonSize.y), buttonSize), "Reload scene")) { SceneManager.LoadScene(1); }
         }
     }
 #endif
