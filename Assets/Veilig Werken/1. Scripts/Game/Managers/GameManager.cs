@@ -18,7 +18,8 @@ namespace VeiligWerken
             base.Awake();
             WindDirection = Random.Range(0.0f, 360.0f);
 
-            GameObject playerGameObject = Instantiate(ResourceManager.Instance.PlayerPrefab, Vector3.zero, Quaternion.identity);
+            Vector3 spawnPosition = possibleSpawnPoints[Random.Range(0, possibleSpawnPoints.Length)].position;
+            GameObject playerGameObject = Instantiate(ResourceManager.Instance.PlayerPrefab, spawnPosition, Quaternion.identity);
             Player = playerGameObject.GetComponent<Player>();
         }
     }

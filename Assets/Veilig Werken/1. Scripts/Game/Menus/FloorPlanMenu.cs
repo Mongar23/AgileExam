@@ -1,5 +1,4 @@
-﻿using System;
-using MBevers;
+﻿using MBevers;
 using MBevers.Menus;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,8 +10,8 @@ namespace VeiligWerken.Menus
     /// </summary>
     public class FloorPlanMenu : Menu
     {
-        [SerializeField] [Required] private SpriteRenderer worldMap;
-        [SerializeField] [Required] private Image uiMap;
+        [SerializeField, Required] private SpriteRenderer worldMap;
+        [SerializeField, Required] private Image uiMap;
         private RectTransform youAreHereMarker = null;
         private Vector2 playerPosition01 = new Vector2();
 

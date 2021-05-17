@@ -21,11 +21,23 @@ namespace VeiligWerken.Menus
         {
             base.Start();
 
-            replayButton.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name));
+            replayButton.onClick.AddListener(() =>
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                AudioManager.Instance.Play("UI Click");
+            });
 #if UNITY_EDITOR
-            quitButton.onClick.AddListener(() => EditorApplication.isPlaying = false);
+            quitButton.onClick.AddListener(() =>
+            {
+                EditorApplication.isPlaying = false;
+                AudioManager.Instance.Play("UI Click");
+            });
 #else
-            quitButton.onClick.AddListener(Application.Quit);
+            quitButton.onClick.AddListener(() =>
+            {
+                Application.Quit();
+                AudioManager.Instance.Play("UI Click");
+            });
 #endif
         }
 
