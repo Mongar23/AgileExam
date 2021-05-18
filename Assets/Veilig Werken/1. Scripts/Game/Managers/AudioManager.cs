@@ -27,25 +27,27 @@ namespace VeiligWerken
 
         public AudioSource Play(string clipName)
         {
-            //Get sound clip from array.
+            // Get sound clip from array.
             SoundClip soundClip = Array.Find(soundClips, clip => clip.Name == clipName);
             if(soundClip == null) { throw new NullReferenceException($"There is no clip named {clipName} found in the soundClips array."); }
 
-            //Making a new GameObject
+            // Making a new GameObject
             var clipGameObject = new GameObject(clipName);
             clipGameObject.transform.SetParent(CachedTransform);
 
-            //Adding and setting up a audio source component.
+            // Adding and setting up a audio source component.
             var audioSource = clipGameObject.AddComponent<AudioSource>();
             audioSource.clip = soundClip.AudioClip;
             audioSource.volume = soundClip.Volume;
             audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master")[0];
 
+            // Play the audio
             audioSource.Play();
 
+            // If the sound clip is a SFX destroy the game object when it is done playing.
             if(soundClip.IsSFX) { Destroy(clipGameObject, audioSource.clip.length + 0.1f); }
 
-            //Return audio source.
+            // Return audio source.
             return audioSource;
         }
     }

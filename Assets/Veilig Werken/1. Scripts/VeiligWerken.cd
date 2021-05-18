@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="FollowingCamera">
+    <Position X="6.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACEAAAAiIAAAAACAAAIAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Game\FollowingCamera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeiligWerken.AudioManager">
+    <Position X="0.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAQAAgAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Game\Managers\AudioManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeiligWerken.GameManager">
+    <Position X="0.5" Y="2.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAgAAQAAAEA=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Game\Managers\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeiligWerken.ResourceManager">
+    <Position X="10.5" Y="3.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Game\Managers\ResourceManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeiligWerken.Player">
+    <Position X="3.5" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Game\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeiligWerken.PlayerMovement">
+    <Position X="3.25" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>BAQAQAAAIiAAAABgAAAAAAAAAAAAABIIAAAQAAAAAAA=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Game\PlayerMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeiligWerken.Shelter">
+    <Position X="3.5" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Game\Shelter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeiligWerken.Menus.FinishedMenu">
+    <Position X="5.75" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACEAgAAAAAAAAAAAAAAAAAAAAAAQgAAAAAA=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Game\Menus\FinishedMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeiligWerken.Menus.FloorPlanMenu">
+    <Position X="9.25" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACACAAgAAAAAAgAAAAAAAIAAAAAAACgAAAAAE=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Game\Menus\FloorPlanMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeiligWerken.Menus.PlayerHUDMenu">
+    <Position X="0.5" Y="5.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAgAAAAAAAAAAAAAAAAAAAAAABgAAAAAA=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Game\Menus\PlayerHUDMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeiligWerken.Tools.SoundClip">
+    <Position X="8" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAABAAQAAAAEgAAAAIIAAAACAAA=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Tools\SoundClip.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
