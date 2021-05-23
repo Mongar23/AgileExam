@@ -306,8 +306,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a4e4ef44874e9b8dd9ec34a825699f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldMap: {fileID: 1375816090}
+  worldMap: {fileID: 0}
   uiMap: {fileID: 1348354527}
+--- !u!4 &312308177 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8731033067985811464, guid: 553c463dc805e62419d4a7805c0b89e3, type: 3}
+  m_PrefabInstance: {fileID: 9141373123552058813}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &374182742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,7 +1098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 096babd43d804e04a94c40b60cce5221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 1375816090}
+  map: {fileID: 1778305244}
 --- !u!1 &1012600670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1905,11 +1910,69 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1348354525}
   m_CullTransparentMesh: 1
---- !u!212 &1375816090 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 9141373124390868007, guid: 553c463dc805e62419d4a7805c0b89e3, type: 3}
-  m_PrefabInstance: {fileID: 9141373123552058813}
+--- !u!1 &1354373195
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1354373196}
+  - component: {fileID: 1354373197}
+  - component: {fileID: 1354373198}
+  m_Layer: 0
+  m_Name: A*
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1354373196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354373195}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1621699196}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1354373197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354373195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4658de1e613b47839e8af3433c9715fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onlyDrawPath: 0
+  unwalkableMask:
+    serializedVersion: 2
+    m_Bits: 64
+  gridWorldSize: {x: 120, y: 110}
+  nodeRadius: 0.5
+--- !u!114 &1354373198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354373195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0de00128ad53495cbfe3df0a77f5f565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destinationTransform: {fileID: 312308177}
 --- !u!1 &1425765168
 GameObject:
   m_ObjectHideFlags: 0
@@ -2145,7 +2208,7 @@ GameObject:
   - component: {fileID: 1621699197}
   m_Layer: 0
   m_Name: MANAGERS
-  m_TagString: Shelter
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2165,6 +2228,7 @@ Transform:
   - {fileID: 2053354365}
   - {fileID: 374182743}
   - {fileID: 1269834382}
+  - {fileID: 1354373196}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2301,6 +2365,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720314828}
   m_CullTransparentMesh: 1
+--- !u!212 &1778305244 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6782470191641030777, guid: 553c463dc805e62419d4a7805c0b89e3, type: 3}
+  m_PrefabInstance: {fileID: 9141373123552058813}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1827744197
 GameObject:
   m_ObjectHideFlags: 0
@@ -2755,6 +2824,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 886111390}
     m_Modifications:
+    - target: {fileID: 2746078049346437512, guid: 553c463dc805e62419d4a7805c0b89e3, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9141373124469304928, guid: 553c463dc805e62419d4a7805c0b89e3, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2803,7 +2876,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map_GroundFloor
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1237851033956792843, guid: 553c463dc805e62419d4a7805c0b89e3, type: 3}
+    - {fileID: 5530736317348464492, guid: 553c463dc805e62419d4a7805c0b89e3, type: 3}
+    - {fileID: 6444285203792577147, guid: 553c463dc805e62419d4a7805c0b89e3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 553c463dc805e62419d4a7805c0b89e3, type: 3}
 --- !u!4 &9141373123552058814 stripped
 Transform:
