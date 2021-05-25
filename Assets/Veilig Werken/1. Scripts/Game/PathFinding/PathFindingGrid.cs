@@ -18,7 +18,7 @@ namespace VeiligWerken.PathFinding
         [SerializeField] private float nodeRadius;
 
         public List<Node> Path { get; set; }
-        public int nodeCount => gridSize.x * gridSize.y;
+        public int NodeCount => gridSize.x * gridSize.y;
 
         private float nodeDiameter = 0;
         private Node[,] grid;
@@ -28,7 +28,7 @@ namespace VeiligWerken.PathFinding
         {
             nodeDiameter = nodeRadius * 2;
 
-            // Calculate grid size.
+            // Calculate grid size in nodes.
             int x = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
             int y = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
             gridSize = new Vector2Int(x, y);
@@ -65,7 +65,10 @@ namespace VeiligWerken.PathFinding
 
         private void CreateGrid()
         {
+            // Make a new two dimensional grid array with the max amount of node fitted in de world size of the grid.
             grid = new Node[gridSize.x, gridSize.y];
+            
+            // Get the bottom left of corner of the grid as a world point.
             Vector3 bottomLeft = CachedTransform.position - Vector3.right * gridWorldSize.x * 0.5f - Vector3.up * gridWorldSize.y * 0.5f;
 
             for (var x = 0; x < gridSize.x; x++)
@@ -89,12 +92,16 @@ namespace VeiligWerken.PathFinding
             {
                 for (int y = -1; y <= 1; y++)
                 {
+                    // Skip when both values are 0 meaning its the node you want the neighbors from. 
                     if(x == 0 && y == 0) { continue; }
-
+                    
+                    // Get the position of the neighbor in the grid.
                     var gridPosition = new Vector2Int(node.GridPosition.x + x, node.GridPosition.y + y);
-
+                    
+                    // Skip if the position is out side the grid bounds. 
                     if(gridPosition.x < 0 || gridPosition.x >= gridSize.x || gridPosition.y < 0 || gridPosition.y >= gridSize.y) { continue; }
 
+                    // Add neighbor to the neighbors set. 
                     neighbours.Add(grid[gridPosition.x, gridPosition.y]);
                 }
             }

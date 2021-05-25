@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using MBevers;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -12,8 +13,12 @@ namespace VeiligWerken
     /// </summary>
     public class AudioManager : Singleton<AudioManager>
     {
+        private const float TIME_BETWEEN_ALARM_SECTIONS = 0.5f;
+
         [SerializeField, Required] private AudioMixer audioMixer;
         [SerializeField] private SoundClip[] soundClips;
+
+        public event Action alarmSequenceCompleted;
 
         private void Start()
         {
@@ -23,13 +28,15 @@ namespace VeiligWerken
 
                 Play(soundClip.Name);
             }
+
+            StartCoroutine(PlayAlarmSequence(new Alarm()));
         }
 
         public AudioSource Play(string clipName)
         {
             // Get sound clip from array.
             SoundClip soundClip = Array.Find(soundClips, clip => clip.Name == clipName);
-            if(soundClip == null) { throw new NullReferenceException($"There is no clip named {clipName} found in the soundClips array."); }
+            if(soundClip == null) { throw new NullReferenceException($"There is no clip named {clipName.Bold()} found in the soundClips array."); }
 
             // Making a new GameObject
             var clipGameObject = new GameObject(clipName);
@@ -49,6 +56,37 @@ namespace VeiligWerken
 
             // Return audio source.
             return audioSource;
+        }
+
+        private IEnumerator PlayAlarmSequence(Alarm alarm)
+        {
+            Debug.Log($"Alarm sequence: {alarm.Hundred}{alarm.Ten}{alarm.One}");
+
+            AudioSource beep;
+
+            // Play as many alarm beeps as specified in the alarm as hundred for the first number.
+            for (var i = 0; i < alarm.Hundred; i++)
+            {
+                beep = Play("Alarm Beep");
+                yield return new WaitForSeconds(beep.clip.length);
+            }
+
+            // Wait another half a second before section of the alarm is played so the total wait time is 1 second.
+            yield return new WaitForSeconds(TIME_BETWEEN_ALARM_SECTIONS);
+
+            beep = Play("Alarm Beep");
+
+            // Wait for the next alarm section.
+            yield return new WaitForSeconds(beep.clip.length + TIME_BETWEEN_ALARM_SECTIONS);
+
+            // Play as many alarm beeps as specified in the alarm as One for the last number.
+            for (var i = 0; i < alarm.One; i++)
+            {
+                beep = Play("Alarm Beep");
+                yield return new WaitForSeconds(beep.clip.length);
+            }
+            
+            alarmSequenceCompleted?.Invoke();
         }
     }
 }

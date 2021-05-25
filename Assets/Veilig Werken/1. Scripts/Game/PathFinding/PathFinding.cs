@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using MBevers;
 using UnityEngine;
 using VeiligWerken.Tools;
-using Debug = UnityEngine.Debug;
 
 namespace VeiligWerken.PathFinding
 {
     /// <summary>
+    ///     This class finds a the fastest path from a to b using the grid made in the <see cref="PathFindingGrid" /> class.
+    ///     The path is found using the A* algorithm. As a guidance for this, I used
+    ///     <see href="https://www.youtube.com/playlist?list=PLFt_AvWsXl0cq5Umv3pMC9SPnKjfp9eGW">this</see> video series.
     ///     <para>Created by Mathias on 19-05-2021</para>
     /// </summary>
     [RequireComponent(typeof(PathFindingGrid))]
@@ -27,7 +28,7 @@ namespace VeiligWerken.PathFinding
         private void Update()
         {
             if(playerTransform == null && destinationTransform == null) { return; }
-            
+
             FindPath(playerTransform.position, destinationTransform.position);
         }
 
@@ -38,7 +39,7 @@ namespace VeiligWerken.PathFinding
             Node destinationNode = grid.GetNodeFromWorldPoint(destination);
 
             // Set of open and closed nodes. And add start node to open set.
-            var openNodes = new Heap<Node>(grid.nodeCount);
+            var openNodes = new Heap<Node>(grid.NodeCount);
             var closedNodes = new HashSet<Node>();
             openNodes.Add(startNode);
 

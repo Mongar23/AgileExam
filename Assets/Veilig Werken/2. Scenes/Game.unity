@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a4e4ef44874e9b8dd9ec34a825699f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldMap: {fileID: 0}
+  worldMap: {fileID: 1778305244}
   uiMap: {fileID: 1348354527}
 --- !u!4 &312308177 stripped
 Transform:
@@ -342,7 +342,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1621699196}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &374182744
 MonoBehaviour:
@@ -1481,7 +1481,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1621699196}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1212078804
 MonoBehaviour:
@@ -1570,7 +1570,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1621699196}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1269834383
 MonoBehaviour:
@@ -1587,6 +1587,7 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: ed1d7cb329c26124da26bd332695be1f, type: 2}
   soundClips:
   - {fileID: 11400000, guid: 0fdc486c35cc0f9429629a24937acac3, type: 2}
+  - {fileID: 11400000, guid: 5167226481202ca47928d0b372c1978c, type: 2}
 --- !u!1 &1333232941
 GameObject:
   m_ObjectHideFlags: 0
@@ -1940,7 +1941,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1621699196}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1354373197
 MonoBehaviour:
@@ -1954,7 +1955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4658de1e613b47839e8af3433c9715fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onlyDrawPath: 0
+  onlyDrawPath: 1
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 64
@@ -2224,11 +2225,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1354373196}
+  - {fileID: 1269834382}
   - {fileID: 1212078803}
   - {fileID: 2053354365}
   - {fileID: 374182743}
-  - {fileID: 1269834382}
-  - {fileID: 1354373196}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2803,7 +2804,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1621699196}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2053354366
 MonoBehaviour:
@@ -2824,6 +2825,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 886111390}
     m_Modifications:
+    - target: {fileID: 2399858366623159356, guid: 553c463dc805e62419d4a7805c0b89e3, type: 3}
+      propertyPath: m_Size.x
+      value: 7.0258026
+      objectReference: {fileID: 0}
+    - target: {fileID: 2399858366623159356, guid: 553c463dc805e62419d4a7805c0b89e3, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.72233963
+      objectReference: {fileID: 0}
     - target: {fileID: 2746078049346437512, guid: 553c463dc805e62419d4a7805c0b89e3, type: 3}
       propertyPath: m_Layer
       value: 0

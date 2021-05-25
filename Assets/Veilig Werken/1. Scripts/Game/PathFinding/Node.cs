@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using VeiligWerken.Tools;
 
 namespace VeiligWerken.PathFinding
@@ -17,13 +18,19 @@ namespace VeiligWerken.PathFinding
 
         private int FCost => GCost + HCost;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Node"/> class with parameters.
+        /// </summary>
+        /// <param name="isWalkable">Determines if the node is walkable and thus be added to a path.</param>
+        /// <param name="worldPosition">Center of the unity <see cref="Transform"/>.</param>
+        /// <param name="gridPosition">Position in the <see cref="PathFindingGrid"/> in ints.</param>
         public Node(bool isWalkable, Vector2 worldPosition, Vector2Int gridPosition)
         {
             IsWalkable = isWalkable;
             WorldPosition = worldPosition;
             GridPosition = gridPosition;
         }
-
+        
         public int HeapIndex { get; set; }
 
         public int CompareTo(Node other)

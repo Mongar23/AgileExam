@@ -2,7 +2,12 @@
 
 namespace VeiligWerken.Tools
 {
-    public interface IHeapItem<T> : IComparable<T>
+    /// <summary>
+    /// When a class 
+    /// <para>Created by Mathias on 20-05-2021</para>
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface IHeapItem<in T> : IComparable<T>
     {
         int HeapIndex { get; set; }
     }
