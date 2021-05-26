@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using MBevers;
+using MBevers.Menus;
 using UnityEngine;
 using UnityEngine.Audio;
+using VeiligWerken.Menus;
 using VeiligWerken.Tools;
 
 namespace VeiligWerken
@@ -18,10 +20,12 @@ namespace VeiligWerken
         [SerializeField, Required] private AudioMixer audioMixer;
         [SerializeField] private SoundClip[] soundClips;
 
-        public event Action alarmSequenceCompleted;
+        public event Action AlarmSequenceDoneEvent;
 
-        private void Start()
+        protected override void Awake()
         {
+            base.Awake();
+            
             foreach (SoundClip soundClip in soundClips)
             {
                 if(soundClip.IsSFX) { continue; }
@@ -29,7 +33,7 @@ namespace VeiligWerken
                 Play(soundClip.Name);
             }
 
-            StartCoroutine(PlayAlarmSequence(new Alarm()));
+            StartCoroutine(PlayAlarmSequence(3, 2));
         }
 
         public AudioSource Play(string clipName)
@@ -58,14 +62,12 @@ namespace VeiligWerken
             return audioSource;
         }
 
-        private IEnumerator PlayAlarmSequence(Alarm alarm)
-        {
-            Debug.Log($"Alarm sequence: {alarm.Hundred}{alarm.Ten}{alarm.One}");
-
+        public IEnumerator PlayAlarmSequence(int hundred, int one)
+        { 
             AudioSource beep;
 
             // Play as many alarm beeps as specified in the alarm as hundred for the first number.
-            for (var i = 0; i < alarm.Hundred; i++)
+            for (var i = 0; i < hundred; i++)
             {
                 beep = Play("Alarm Beep");
                 yield return new WaitForSeconds(beep.clip.length);
@@ -80,13 +82,13 @@ namespace VeiligWerken
             yield return new WaitForSeconds(beep.clip.length + TIME_BETWEEN_ALARM_SECTIONS);
 
             // Play as many alarm beeps as specified in the alarm as One for the last number.
-            for (var i = 0; i < alarm.One; i++)
+            for (var i = 0; i < one; i++)
             {
                 beep = Play("Alarm Beep");
                 yield return new WaitForSeconds(beep.clip.length);
             }
             
-            alarmSequenceCompleted?.Invoke();
+            AlarmSequenceDoneEvent?.Invoke();
         }
     }
 }

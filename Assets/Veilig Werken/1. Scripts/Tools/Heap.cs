@@ -1,6 +1,7 @@
 ﻿namespace VeiligWerken.Tools
 {
     /// <summary>
+    /// 
     ///     <para>Created by Mathias on 20-05-2021</para>
     /// </summary>
     public class Heap<T> where T : IHeapItem<T>
