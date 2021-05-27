@@ -20,7 +20,7 @@ namespace VeiligWerken
         [SerializeField, Required] private AudioMixer audioMixer;
         [SerializeField] private SoundClip[] soundClips;
 
-        public event Action AlarmSequenceDoneEvent;
+        public Action AlarmSequenceDoneEvent;
 
         protected override void Awake()
         {

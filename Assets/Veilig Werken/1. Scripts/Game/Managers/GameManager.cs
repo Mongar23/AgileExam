@@ -18,6 +18,7 @@ namespace VeiligWerken
         public Player Player { get; private set; } = null;
         public float WindDirection { get; private set; } = 0.0f;
         public int CorrectAnsweredQuestions { get; set; } = 0;
+        public bool HasCompletedQuiz { get; private set; }
 
         protected override void Awake()
         {
@@ -28,7 +29,11 @@ namespace VeiligWerken
             GameObject playerGameObject = Instantiate(ResourceManager.Instance.PlayerPrefab, spawnPosition, Quaternion.identity);
             Player = playerGameObject.GetComponent<Player>();
 
-            AudioManager.Instance.AlarmSequenceDoneEvent += () => MenuManager.Instance.OpenMenu<QuizMenu>();
+            AudioManager.Instance.AlarmSequenceDoneEvent += () =>
+            {
+                var quizMenu = MenuManager.Instance.OpenMenu<QuizMenu>();
+                quizMenu.QuizCompletedEvent += () => HasCompletedQuiz = true;
+            };
         }
     }
 }

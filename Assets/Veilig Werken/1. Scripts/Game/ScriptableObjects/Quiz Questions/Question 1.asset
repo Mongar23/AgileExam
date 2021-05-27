@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 005be534d79c4631abe5abd8532928c5, type: 3}
   m_Name: Question 1
   m_EditorClassIdentifier: 
-  question: Based one the sound you just heard, what is the number of the alarm dailer?
+  question: Based on the alarm you just heard, what kind of incident has happened?
   answers:
   - isRightAnswer: 0
-    answer: 221
-  - isRightAnswer: 1
-    answer: 312
+    answer: A serious incident, even if the incident is not in your building you
+      need to seek shelter immediately.
   - isRightAnswer: 0
-    answer: 231
+    answer: The incident is over you can continue working.
+  - isRightAnswer: 1
+    answer: A local incident, if the you are not in the building of the incident
+      you can keep working.

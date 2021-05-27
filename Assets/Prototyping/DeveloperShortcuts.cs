@@ -15,6 +15,12 @@ namespace Prototyping
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
+            
+            if(GUI.Button(new Rect(new Vector2(10, Screen.height - buttonSize.y * 1.15f - buttonSize.y), buttonSize), "Skip alarm"))
+            {
+                AudioManager.Instance.StopAllCoroutines();
+                AudioManager.Instance.AlarmSequenceDoneEvent.Invoke();
+            }
         }
     }
 #endif

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace VeiligWerken.Tools
 {
-    [CreateAssetMenu(fileName = "QuizQuestion", menuName = "Veilig Werken/Quiz Question", order = 0)]
+    [CreateAssetMenu(fileName = "QuizQuestion", menuName = "Veilig Werken/Quiz Question", order = 1)]
     public class QuizQuestion : ScriptableObject
     {
         private const int MAX_ANSWERS = 4;

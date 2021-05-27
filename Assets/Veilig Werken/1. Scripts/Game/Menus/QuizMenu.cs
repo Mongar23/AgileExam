@@ -1,4 +1,5 @@
-﻿using MBevers;
+﻿using System;
+using MBevers;
 using MBevers.Menus;
 using TMPro;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace VeiligWerken.Menus
     public class QuizMenu : Menu
     {
         [SerializeField] private QuizQuestion[] quizQuestions;
+
+        public event Action QuizCompletedEvent;
 
         private int answeredQuestions = 0;
         private int correctAnsweredQuestions = 0;
@@ -29,6 +32,7 @@ namespace VeiligWerken.Menus
 
             if(!Content.GetChild(0).gameObject.activeInHierarchy) { return; }
 
+            QuizCompletedEvent?.Invoke();
             Close();
         }
 
