@@ -8,6 +8,7 @@ namespace VeiligWerken
     /// <summary>
     ///     <para>Created by Mathias on 17-05-2021</para>
     /// </summary>
+    [RequireComponent(typeof(Collider2D))]
     public class Shelter : MonoBehaviour
     {
         private void OnTriggerEnter2D(Collider2D other)

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 namespace VeiligWerken.Menus
 {
     /// <summary>
+    ///     This class handles 
     ///     <para>Created by Mathias on 13-05-2021</para>
     /// </summary>
     public class FloorPlanMenu : Menu

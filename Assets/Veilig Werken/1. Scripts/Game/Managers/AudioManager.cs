@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections;
 using MBevers;
-using MBevers.Menus;
 using UnityEngine;
 using UnityEngine.Audio;
-using VeiligWerken.Menus;
 using VeiligWerken.Tools;
 
 namespace VeiligWerken
@@ -25,7 +23,7 @@ namespace VeiligWerken
         protected override void Awake()
         {
             base.Awake();
-            
+
             foreach (SoundClip soundClip in soundClips)
             {
                 if(soundClip.IsSFX) { continue; }
@@ -36,6 +34,16 @@ namespace VeiligWerken
             StartCoroutine(PlayAlarmSequence(3, 2));
         }
 
+        /// <summary>
+        ///     The <c>Play</c> method plays a sound based on the <paramref name="clipName" />.
+        /// </summary>
+        /// <param name="clipName">Name of the <see cref="SoundClip" /> that should be played.</param>
+        /// <returns>Returns a <see cref="AudioSource" /> created based on the settings defined in the <see cref="SoundClip" />.</returns>
+        /// <exception cref="NullReferenceException">
+        ///     Thrown when there is no <see cref="SoundClip" /> in the soundClips array named
+        ///     <paramref name="clipName" />.
+        /// </exception>
+        //TODO: make sure a non SFX sound can't be played twice.
         public AudioSource Play(string clipName)
         {
             // Get sound clip from array.
@@ -62,8 +70,8 @@ namespace VeiligWerken
             return audioSource;
         }
 
-        public IEnumerator PlayAlarmSequence(int hundred, int one)
-        { 
+        private IEnumerator PlayAlarmSequence(int hundred, int one)
+        {
             AudioSource beep;
 
             // Play as many alarm beeps as specified in the alarm as hundred for the first number.
@@ -87,7 +95,7 @@ namespace VeiligWerken
                 beep = Play("Alarm Beep");
                 yield return new WaitForSeconds(beep.clip.length);
             }
-            
+
             AlarmSequenceDoneEvent?.Invoke();
         }
     }

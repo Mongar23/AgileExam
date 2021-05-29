@@ -12,25 +12,33 @@ public class FollowingCamera : ExtendedMonoBehaviour
     private const float CAMERA_START_Z = -10.0f;
     [SerializeField] [Required] private SpriteRenderer map;
 
+    private bool shouldFollowTarget = false;
     private new Camera camera = null;
     private Transform targetTransform = null;
     private Vector3 minBounds = new Vector3();
     private Vector3 maxBounds = new Vector3();
 
-    private void Start()
+    private void Awake()
     {
         camera = ForceComponent<Camera>();
-        targetTransform = GameManager.Instance.Player.transform;
-
+        
         float halfHeight = camera.orthographicSize;
         float halfWidth = halfHeight * camera.aspect;
-
+        
         minBounds = map.bounds.min + new Vector3(halfWidth, halfHeight, 0.0f);
         maxBounds = map.bounds.max - new Vector3(halfWidth, halfHeight, 0.0f);
+
+        GameManager.Instance.PlayerSpawnedEvent += player =>
+        {
+            targetTransform = player.transform;
+            shouldFollowTarget = true;
+        };
     }
 
     private void LateUpdate()
     {
+        if(!shouldFollowTarget) { return; }
+
         Vector3 targetPosition = targetTransform.position;
         CachedTransform.position = new Vector3(targetPosition.x, targetPosition.y, CAMERA_START_Z);
 

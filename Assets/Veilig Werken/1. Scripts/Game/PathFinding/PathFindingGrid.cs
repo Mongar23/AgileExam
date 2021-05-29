@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MBevers;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ namespace VeiligWerken.PathFinding
 
         public List<Node> Path { get; set; }
         public int NodeCount => gridSize.x * gridSize.y;
+
+        public event Action GridCreatedEvent;
 
         private float nodeDiameter = 0;
         private Node[,] grid;
@@ -55,7 +58,7 @@ namespace VeiligWerken.PathFinding
             Node playerNode = GetNodeFromWorldPoint(GameManager.Instance.Player.CachedTransform.position);
             foreach (Node node in grid)
             {
-                Gizmos.color = node.IsWalkable ? node == playerNode ? Color.cyan : new Color(0, 0, 0, 0) : Color.red;
+                Gizmos.color = node.IsWalkable ? node == playerNode ? Color.cyan : new Color(0, 0, 0, 0) : new Color(255, 0, 0, 0.25f);
 
                 if(Path != null && Path.Contains(node)) { Gizmos.color = Color.green; }
 
@@ -67,7 +70,7 @@ namespace VeiligWerken.PathFinding
         {
             // Make a new two dimensional grid array with the max amount of node fitted in de world size of the grid.
             grid = new Node[gridSize.x, gridSize.y];
-            
+
             // Get the bottom left of corner of the grid as a world point.
             Vector3 bottomLeft = CachedTransform.position - Vector3.right * gridWorldSize.x * 0.5f - Vector3.up * gridWorldSize.y * 0.5f;
 
@@ -82,6 +85,8 @@ namespace VeiligWerken.PathFinding
                     grid[x, y] = new Node(IsNodeWalkable(worldPoint), worldPoint, new Vector2Int(x, y));
                 }
             }
+
+            GridCreatedEvent?.Invoke();
         }
 
         public List<Node> GetNeighbours(Node node)
@@ -94,10 +99,10 @@ namespace VeiligWerken.PathFinding
                 {
                     // Skip when both values are 0 meaning its the node you want the neighbors from. 
                     if(x == 0 && y == 0) { continue; }
-                    
+
                     // Get the position of the neighbor in the grid.
                     var gridPosition = new Vector2Int(node.GridPosition.x + x, node.GridPosition.y + y);
-                    
+
                     // Skip if the position is out side the grid bounds. 
                     if(gridPosition.x < 0 || gridPosition.x >= gridSize.x || gridPosition.y < 0 || gridPosition.y >= gridSize.y) { continue; }
 
@@ -136,7 +141,8 @@ namespace VeiligWerken.PathFinding
             var windDirection = new Vector2(Mathf.Cos(windDirectionInRad), Mathf.Sin(windDirectionInRad));
 
             // Return true when the raycast has hit an object int the unwalkable mask, which in this case are only walls.
-            return Physics2D.Raycast(nodeCenter, windDirection, MAX_RAY_DISTANCE, unwalkableMask);;
+            return Physics2D.Raycast(nodeCenter, windDirection, MAX_RAY_DISTANCE, unwalkableMask);
+            ;
         }
     }
 }

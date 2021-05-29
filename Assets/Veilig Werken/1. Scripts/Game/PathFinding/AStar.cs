@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using MBevers;
 using UnityEngine;
 using VeiligWerken.Tools;
@@ -12,34 +13,44 @@ namespace VeiligWerken.PathFinding
     ///     <para>Created by Mathias on 19-05-2021</para>
     /// </summary>
     [RequireComponent(typeof(PathFindingGrid))]
-    public class PathFinding : ExtendedMonoBehaviour
+    public class AStar : Singleton<AStar>
     {
-        [SerializeField] private Transform destinationTransform;
-        private PathFindingGrid grid = null;
+        private readonly Dictionary<int, List<Node>> paths = new Dictionary<int, List<Node>>();
 
-        private Transform playerTransform;
+        public PathFindingGrid Grid { get; private set; } = null;
+        private Transform playerTransform = null;
 
-        private void Awake()
+        protected override void Awake()
         {
-            grid = GetComponent<PathFindingGrid>();
-            playerTransform = GameManager.Instance.Player.CachedTransform;
+            base.Awake();
+
+            Grid = GetComponent<PathFindingGrid>();
+            GameManager.Instance.PlayerSpawnedEvent += OnPlayerSpawned;
         }
 
-        private void Update()
+        private void OnPlayerSpawned(Player player)
         {
-            if(playerTransform == null && destinationTransform == null) { return; }
+            playerTransform = player.CachedTransform;
 
-            FindPath(playerTransform.position, destinationTransform.position);
+            //Find a path to each shelter.
+            foreach (Shelter shelter in FindObjectsOfType<Shelter>())
+            {
+                Vector3 shelterPosition = shelter.transform.position;
+                FindPath(playerTransform.position, shelterPosition);
+            }
+
+            // Draw best path. 
+            Grid.Path = paths[paths.Keys.Min()];
         }
 
         private void FindPath(Vector2 start, Vector2 destination)
         {
             // Determine the start and destination node based aon a world position.
-            Node startNode = grid.GetNodeFromWorldPoint(start);
-            Node destinationNode = grid.GetNodeFromWorldPoint(destination);
+            Node startNode = Grid.GetNodeFromWorldPoint(start);
+            Node destinationNode = Grid.GetNodeFromWorldPoint(destination);
 
             // Set of open and closed nodes. And add start node to open set.
-            var openNodes = new Heap<Node>(grid.NodeCount);
+            var openNodes = new Heap<Node>(Grid.NodeCount);
             var closedNodes = new HashSet<Node>();
             openNodes.Add(startNode);
 
@@ -53,10 +64,10 @@ namespace VeiligWerken.PathFinding
                 if(currentNode == destinationNode)
                 {
                     RetracePath(startNode, destinationNode);
-                    return;
+                    
                 }
 
-                foreach (Node neighbour in grid.GetNeighbours(currentNode))
+                foreach (Node neighbour in Grid.GetNeighbours(currentNode))
                 {
                     if(!neighbour.IsWalkable || closedNodes.Contains(neighbour)) { continue; }
 
@@ -79,18 +90,20 @@ namespace VeiligWerken.PathFinding
         {
             var path = new List<Node>();
             Node currentNode = endNode;
+            var totalPathCost = 0;
 
             while (currentNode != startNode)
             {
+                totalPathCost += currentNode.FCost;
                 path.Add(currentNode);
                 currentNode = currentNode.Parent;
             }
 
-            path.Reverse();
-            grid.Path = path;
+            var pathPair = new KeyValuePair<int, List<Node>>(totalPathCost / path.Count, path);
+            paths.Add(pathPair.Key, pathPair.Value);
         }
 
-        private int GetDistance(Node a, Node b)
+        private static int GetDistance(Node a, Node b)
         {
             // Calculate distance in nodes.
             var distance = new Vector2Int(Mathf.Abs(a.GridPosition.x - b.GridPosition.x), Mathf.Abs(a.GridPosition.y - b.GridPosition.y));

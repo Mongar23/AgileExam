@@ -1,12 +1,18 @@
 ﻿namespace VeiligWerken.Tools
 {
     /// <summary>
-    /// 
+    ///     This class is a array-based generic min-heap data-structure. To learn more about heaps,
+    ///     <see href="https://www.tutorialspoint.com/data_structures_algorithms/heap_data_structure.htm">this</see> is a
+    ///     simple article on heaps.
     ///     <para>Created by Mathias on 20-05-2021</para>
     /// </summary>
     public class Heap<T> where T : IHeapItem<T>
     {
+        /// <summary>
+        ///     Current amount of <see cref="IHeapItem{T}" />s in the <see cref="Heap{T}" />
+        /// </summary>
         public int Count { get; private set; }
+
         private readonly T[] items;
 
         public Heap(int maxHeapSize) { items = new T[maxHeapSize]; }
@@ -51,6 +57,7 @@
 
         public void UpdateItem(T item) { SortUp(item); }
 
+        
         public bool Contains(T item) => Equals(items[item.HeapIndex], item);
 
         private void SortDown(T item)
