@@ -37,8 +37,8 @@ namespace VeiligWerken.Menus
         }
 
 
-        public override bool CanBeOpened() => !MenuManager.Instance.IsAnyOpen && answeredQuestions != quizQuestions.Length;
-        public override bool CanBeClosed() => true;
+        protected override bool CanBeOpened() => !MenuManager.Instance.IsAnyOpen && answeredQuestions != quizQuestions.Length;
+        protected override bool CanBeClosed() => true;
 
         private void OnOpened()
         {

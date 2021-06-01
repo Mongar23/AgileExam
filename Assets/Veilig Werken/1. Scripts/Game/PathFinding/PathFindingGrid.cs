@@ -137,12 +137,11 @@ namespace VeiligWerken.PathFinding
             if(checkCircle != null) { return false; }
 
             // Convert the wind direction from degrees to radian. Then convert the radian to a vector 2.
-            float windDirectionInRad = -GameManager.Instance.WindDirection * Mathf.Deg2Rad;
-            var windDirection = new Vector2(Mathf.Cos(windDirectionInRad), Mathf.Sin(windDirectionInRad));
+            float windDirectionInRad = (GameManager.Instance.WindDirection + 180.0f) * Mathf.Deg2Rad;
+            var windDirection = new Vector2(Mathf.Sin(windDirectionInRad), Mathf.Cos(windDirectionInRad));
 
             // Return true when the raycast has hit an object int the unwalkable mask, which in this case are only walls.
             return Physics2D.Raycast(nodeCenter, windDirection, MAX_RAY_DISTANCE, unwalkableMask);
-            ;
         }
     }
 }

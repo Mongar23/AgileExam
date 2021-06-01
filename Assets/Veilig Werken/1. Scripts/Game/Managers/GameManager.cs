@@ -13,10 +13,10 @@ namespace VeiligWerken
     /// <summary>
     ///     <para>Created by Mathias on 12-05-2021</para>
     /// </summary>
-    public class
-        GameManager : Singleton<GameManager>
+    public class GameManager : Singleton<GameManager>
     {
         [SerializeField] private Transform[] possibleSpawnPoints;
+        
         public Player Player { get; private set; } = null;
         public float WindDirection { get; private set; } = 0.0f;
         public int CorrectAnsweredQuestions { get; set; } = 0;

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using MBevers;
 using UnityEngine;
 using VeiligWerken.Tools;
@@ -18,6 +17,8 @@ namespace VeiligWerken.PathFinding
         private readonly Dictionary<int, List<Node>> paths = new Dictionary<int, List<Node>>();
 
         public PathFindingGrid Grid { get; private set; } = null;
+
+        private int currentPathCost = int.MaxValue;
         private Transform playerTransform = null;
 
         protected override void Awake()
@@ -37,10 +38,11 @@ namespace VeiligWerken.PathFinding
             {
                 Vector3 shelterPosition = shelter.transform.position;
                 FindPath(playerTransform.position, shelterPosition);
+                shelter.PathCost = currentPathCost;
             }
 
-            // Draw best path. 
-            Grid.Path = paths[paths.Keys.Min()];
+            // Draw best path.
+            Grid.Path = paths.ValueFromLowestKey();
         }
 
         private void FindPath(Vector2 start, Vector2 destination)
@@ -64,26 +66,29 @@ namespace VeiligWerken.PathFinding
                 if(currentNode == destinationNode)
                 {
                     RetracePath(startNode, destinationNode);
-                    
+                    return;
                 }
 
-                foreach (Node neighbour in Grid.GetNeighbours(currentNode))
+                //
+                foreach (Node neighbor in Grid.GetNeighbours(currentNode))
                 {
-                    if(!neighbour.IsWalkable || closedNodes.Contains(neighbour)) { continue; }
+                    if(!neighbor.IsWalkable || closedNodes.Contains(neighbor)) { continue; }
 
-                    int newMovementCostToNeighbour = currentNode.GCost + GetDistance(currentNode, neighbour);
+                    int newMovementCostToNeighbor = currentNode.GCost + GetDistance(currentNode, neighbor);
 
-                    if(newMovementCostToNeighbour >= neighbour.GCost && openNodes.Contains(neighbour)) { continue; }
+                    if(newMovementCostToNeighbor >= neighbor.GCost && openNodes.Contains(neighbor)) { continue; }
 
-                    neighbour.GCost = newMovementCostToNeighbour;
-                    neighbour.HCost = GetDistance(neighbour, destinationNode);
-                    neighbour.Parent = currentNode;
+                    neighbor.GCost = newMovementCostToNeighbor;
+                    neighbor.HCost = GetDistance(neighbor, destinationNode);
+                    neighbor.Parent = currentNode;
 
-                    if(openNodes.Contains(neighbour)) { continue; }
+                    if(openNodes.Contains(neighbor)) { continue; }
 
-                    openNodes.Add(neighbour);
+                    openNodes.Add(neighbor);
                 }
             }
+
+            currentPathCost = int.MaxValue;
         }
 
         private void RetracePath(Node startNode, Node endNode)
@@ -99,6 +104,7 @@ namespace VeiligWerken.PathFinding
                 currentNode = currentNode.Parent;
             }
 
+            currentPathCost = totalPathCost;
             var pathPair = new KeyValuePair<int, List<Node>>(totalPathCost / path.Count, path);
             paths.Add(pathPair.Key, pathPair.Value);
         }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using MBevers;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using VeiligWerken.Tools;
 
 namespace VeiligWerken
@@ -24,12 +26,21 @@ namespace VeiligWerken
         {
             base.Awake();
 
+            DontDestroyOnLoad(gameObject);
+
             foreach (SoundClip soundClip in soundClips)
             {
                 if(soundClip.IsSFX) { continue; }
 
                 Play(soundClip.Name);
             }
+
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        {
+            if(scene.buildIndex != 1) { return; }
 
             StartCoroutine(PlayAlarmSequence(3, 2));
         }
@@ -43,12 +54,20 @@ namespace VeiligWerken
         ///     Thrown when there is no <see cref="SoundClip" /> in the soundClips array named
         ///     <paramref name="clipName" />.
         /// </exception>
-        //TODO: make sure a non SFX sound can't be played twice.
         public AudioSource Play(string clipName)
         {
             // Get sound clip from array.
             SoundClip soundClip = Array.Find(soundClips, clip => clip.Name == clipName);
             if(soundClip == null) { throw new NullReferenceException($"There is no clip named {clipName.Bold()} found in the soundClips array."); }
+
+            if(!soundClip.IsSFX)
+            {
+                if(CachedTransform.Cast<Transform>().Any(child => child.name == clipName))
+                {
+                    throw new ArgumentException(
+                        $"There can only be one instance of the soundClip named {clipName.Bold()}. When I should have more instances it should be an SFX");
+                }
+            }
 
             // Making a new GameObject
             var clipGameObject = new GameObject(clipName);
@@ -58,6 +77,7 @@ namespace VeiligWerken
             var audioSource = clipGameObject.AddComponent<AudioSource>();
             audioSource.clip = soundClip.AudioClip;
             audioSource.volume = soundClip.Volume;
+            audioSource.loop = !soundClip.IsSFX;
             audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master")[0];
 
             // Play the audio
