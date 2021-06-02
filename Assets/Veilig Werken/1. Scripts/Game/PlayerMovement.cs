@@ -31,7 +31,7 @@ namespace VeiligWerken
 
         private void Update()
         {
-            if(MenuManager.Instance.IsAnyOpen) { return; }
+            if(MenuManager.Instance.IsAnyOpen || !GameManager.Instance.HasCompletedQuiz) { return; }
 
             input.x = Input.GetAxisRaw("Horizontal");
             input.y = Input.GetAxisRaw("Vertical");
@@ -45,8 +45,8 @@ namespace VeiligWerken
 
         private void FixedUpdate()
         {
-            if(MenuManager.Instance.IsAnyOpen) { return; }
-            
+            if(MenuManager.Instance.IsAnyOpen || !GameManager.Instance.HasCompletedQuiz) { return; }
+
             Vector2 movement = input * (movementSpeed * Time.fixedDeltaTime);
 
             if(IsSprinting) { movement *= sprintMultiplier; }

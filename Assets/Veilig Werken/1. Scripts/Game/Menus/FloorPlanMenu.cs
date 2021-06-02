@@ -6,12 +6,14 @@ using UnityEngine.UI;
 namespace VeiligWerken.Menus
 {
     /// <summary>
+    ///     This class handles
     ///     <para>Created by Mathias on 13-05-2021</para>
     /// </summary>
     public class FloorPlanMenu : Menu
     {
         [SerializeField, Required] private SpriteRenderer worldMap;
         [SerializeField, Required] private Image uiMap;
+        private Button closeButton = null;
         private RectTransform youAreHereMarker = null;
         private Vector2 playerPosition01 = new Vector2();
 
@@ -22,12 +24,21 @@ namespace VeiligWerken.Menus
             Opened += OnOpened;
             Closed += () => MenuManager.Instance.OpenMenu<PlayerHUDMenu>();
 
-            youAreHereMarker = uiMap.rectTransform.Find("YouAreHereArrow") as RectTransform;
-            Content.GetComponentInChildren<Button>()?.onClick.AddListener(Close);
+            youAreHereMarker = Content.FindInAllChildren("YouAreHereArrow") as RectTransform;
+
+            closeButton = Content.GetComponentInChildren<Button>();
+            closeButton.onClick.AddListener(Close);
         }
 
-        public override bool CanBeOpened() => !MenuManager.Instance.IsAnyOpen;
-        public override bool CanBeClosed() => true;
+        private void Update()
+        {
+            if(!Input.GetButtonUp("Submit")) { return; }
+
+            Close();
+        }
+
+        protected override bool CanBeOpened() => !MenuManager.Instance.IsAnyOpen && GameManager.Instance.HasCompletedQuiz;
+        protected override bool CanBeClosed() => true;
 
         private void OnOpened()
         {
@@ -42,7 +53,7 @@ namespace VeiligWerken.Menus
             playerPosition01.y = (playerPosition.y + worldMapSize.y * 0.5f) / worldMapSize.y;
 
             // Add the you are here marker to the UI version of the map.
-            Vector2 uiMapSize = uiMap.rectTransform.sizeDelta;
+            var uiMapSize = new Vector2(uiMap.rectTransform.rect.width, uiMap.rectTransform.rect.height);
             youAreHereMarker.anchoredPosition = new Vector2(uiMapSize.x * playerPosition01.x - uiMapSize.x * 0.5f, uiMapSize.y * playerPosition01.y - uiMapSize.y * 0.5f);
         }
     }

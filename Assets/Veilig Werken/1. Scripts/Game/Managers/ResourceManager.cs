@@ -10,12 +10,14 @@ namespace VeiligWerken
     public class ResourceManager : Singleton<ResourceManager>
     {
         public GameObject PlayerPrefab { get; private set; }
+        public GameObject AnswerUIPrefab { get; private set; }
 
         protected override void Awake()
         {
             base.Awake();
 
             PlayerPrefab = Resources.Load<GameObject>("Player");
+            AnswerUIPrefab = Resources.Load<GameObject>("AnswerUI");
         }
     }
 }

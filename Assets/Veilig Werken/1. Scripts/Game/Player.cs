@@ -12,7 +12,7 @@ namespace VeiligWerken
     {
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Tab)) { MenuManager.Instance.OpenMenu<FloorPlanMenu>(); }
+            if(Input.GetButtonDown("Open map")) { MenuManager.Instance.OpenMenu<FloorPlanMenu>(); }
         }
     }
 }
