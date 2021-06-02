@@ -16,11 +16,11 @@ namespace VeiligWerken
     public class GameManager : Singleton<GameManager>
     {
         [SerializeField] private Transform[] possibleSpawnPoints;
-        
+
         public Player Player { get; private set; } = null;
         public float WindDirection { get; private set; } = 0.0f;
         public int CorrectAnsweredQuestions { get; set; } = 0;
-        public bool HasCompletedQuiz { get; private set; }
+        public bool HasCompletedQuiz { get; private set; } = false;
 
         public event Action<Player> PlayerSpawnedEvent;
 
@@ -29,16 +29,12 @@ namespace VeiligWerken
             base.Awake();
             WindDirection = Random.Range(0.0f, 360.0f);
 
-            AudioManager.Instance.AlarmSequenceDoneEvent += () =>
-            {
-                var quizMenu = MenuManager.Instance.OpenMenu<QuizMenu>();
-                quizMenu.QuizCompletedEvent += () => HasCompletedQuiz = true;
-            };
+            AudioManager.Instance.AlarmSequenceDoneEvent += OnAlarmSequenceDone;
         }
 
-        private void Start() { AStar.Instance.Grid.GridCreatedEvent += OnGridCreatedEvent; }
+        private void Start() { AStar.Instance.Grid.GridCreatedEvent += OnGridCreated; }
 
-        private void OnGridCreatedEvent()
+        private void OnGridCreated()
         {
             List<Transform> validSpawnPoints =
                 possibleSpawnPoints.Where(possibleSpawnPoint => AStar.Instance.Grid.GetNodeFromWorldPoint(possibleSpawnPoint.position).IsWalkable).ToList();
@@ -48,6 +44,18 @@ namespace VeiligWerken
             Player = playerGameObject.GetComponent<Player>();
 
             PlayerSpawnedEvent?.Invoke(Player);
+        }
+
+        private void OnAlarmSequenceDone()
+        {
+            var quizMenu = MenuManager.Instance.OpenMenu<QuizMenu>();
+            quizMenu.QuizCompletedEvent += () => HasCompletedQuiz = true;
+        }
+
+        private void OnDisable()
+        {
+            AudioManager.Instance.AlarmSequenceDoneEvent -= OnAlarmSequenceDone;
+            AStar.Instance.Grid.GridCreatedEvent -= OnGridCreated;
         }
     }
 }
