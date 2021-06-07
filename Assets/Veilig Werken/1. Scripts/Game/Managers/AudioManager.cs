@@ -9,114 +9,126 @@ using VeiligWerken.Tools;
 
 namespace VeiligWerken
 {
-    /// <summary>
-    ///     This class handles all of the audio in the game.
-    ///     <para>Created by Mathias on 17-05-2021</para>
-    /// </summary>
-    public class AudioManager : Singleton<AudioManager>
-    {
-        private const float TIME_BETWEEN_ALARM_SECTIONS = 0.5f;
+	/// <summary>
+	///     This class handles all of the audio in the game.
+	///     <para>Created by Mathias on 17-05-2021</para>
+	/// </summary>
+	public class AudioManager : Singleton<AudioManager>
+	{
+		private const float TIME_BETWEEN_ALARM_SECTIONS = 0.5f;
 
-        [SerializeField, Required] private AudioMixer audioMixer;
-        [SerializeField] private SoundClip[] soundClips;
+		[SerializeField, Required] private AudioMixer audioMixer;
+		[SerializeField] private SoundClip[] soundClips;
 
-        public Action AlarmSequenceDoneEvent;
+		public bool IsAlarmSequencePlaying { get; private set; } = false;
 
-        protected override void Awake()
-        {
-            base.Awake();
+		public Action AlarmSequenceDoneEvent;
 
-            DontDestroyOnLoad(gameObject);
+		protected override void Awake()
+		{
+			base.Awake();
 
-            foreach (SoundClip soundClip in soundClips)
-            {
-                if(soundClip.IsSFX) { continue; }
+			DontDestroyOnLoad(gameObject);
 
-                Play(soundClip.Name);
-            }
+			foreach (SoundClip soundClip in soundClips)
+			{
+				if (soundClip.IsSFX) { continue; }
 
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
+				Play(soundClip.Name);
+			}
 
-        private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
-        {
-            if(scene.buildIndex != 1) { return; }
+			SceneManager.sceneLoaded += OnSceneLoaded;
+		}
 
-            StartCoroutine(PlayAlarmSequence(3, 2));
-        }
+		private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+		{
+			if (scene.buildIndex != 1) { return; }
 
-        /// <summary>
-        ///     The <c>Play</c> method plays a sound based on the <paramref name="clipName" />.
-        /// </summary>
-        /// <param name="clipName">Name of the <see cref="SoundClip" /> that should be played.</param>
-        /// <returns>Returns a <see cref="AudioSource" /> created based on the settings defined in the <see cref="SoundClip" />.</returns>
-        /// <exception cref="NullReferenceException">
-        ///     Thrown when there is no <see cref="SoundClip" /> in the soundClips array named
-        ///     <paramref name="clipName" />.
-        /// </exception>
-        public AudioSource Play(string clipName)
-        {
-            // Get sound clip from array.
-            SoundClip soundClip = Array.Find(soundClips, clip => clip.Name == clipName);
-            if(soundClip == null) { throw new NullReferenceException($"There is no clip named {clipName.Bold()} found in the soundClips array."); }
+			StartCoroutine(PlayAlarmSequence(3, 2));
+		}
 
-            if(!soundClip.IsSFX)
-            {
-                if(CachedTransform.Cast<Transform>().Any(child => child.name == clipName))
-                {
-                    throw new ArgumentException(
-                        $"There can only be one instance of the soundClip named {clipName.Bold()}. When I should have more instances it should be an SFX");
-                }
-            }
+		/// <summary>
+		///     The <c>Play</c> method plays a sound based on the <paramref name="clipName" />.
+		/// </summary>
+		/// <param name="clipName">Name of the <see cref="SoundClip" /> that should be played.</param>
+		/// <returns>Returns a <see cref="AudioSource" /> created based on the settings defined in the <see cref="SoundClip" />.</returns>
+		/// <exception cref="NullReferenceException">
+		///     Thrown when there is no <see cref="SoundClip" /> in the soundClips array named
+		///     <paramref name="clipName" />.
+		/// </exception>
+		public AudioSource Play(string clipName)
+		{
+			// Get sound clip from array.
+			SoundClip soundClip = Array.Find(soundClips, clip => clip.Name == clipName);
+			if (soundClip == null) { throw new NullReferenceException($"There is no clip named {clipName.Bold()} found in the soundClips array."); }
 
-            // Making a new GameObject
-            var clipGameObject = new GameObject(clipName);
-            clipGameObject.transform.SetParent(CachedTransform);
+			// Throw an ArgumentException when the sound clip is not a SFX and there is already an child object with the same name.
+			if (!soundClip.IsSFX)
+			{
+				if (CachedTransform.Cast<Transform>().Any(child => child.name == clipName))
+				{
+					throw new ArgumentException(
+						$"There can only be one instance of the soundClip named {clipName.Bold()}. When I should have more instances it should be an SFX");
+				}
+			}
 
-            // Adding and setting up a audio source component.
-            var audioSource = clipGameObject.AddComponent<AudioSource>();
-            audioSource.clip = soundClip.AudioClip;
-            audioSource.volume = soundClip.Volume;
-            audioSource.loop = !soundClip.IsSFX;
-            audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master")[0];
+			// Make a new game object named 'clipName', and set it as a child of this object. 
+			var clipGameObject = new GameObject(clipName);
+			clipGameObject.transform.SetParent(CachedTransform);
 
-            // Play the audio
-            audioSource.Play();
+			// Adding and setting up a audio source component.
+			var audioSource = clipGameObject.AddComponent<AudioSource>();
+			audioSource.clip = soundClip.AudioClip;
+			audioSource.volume = soundClip.Volume;
+			audioSource.loop = !soundClip.IsSFX;
+			audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master")[0];
 
-            // If the sound clip is a SFX destroy the game object when it is done playing.
-            if(soundClip.IsSFX) { Destroy(clipGameObject, audioSource.clip.length + 0.1f); }
+			// Play the audio
+			audioSource.Play();
 
-            // Return audio source.
-            return audioSource;
-        }
+			// If the sound clip is a SFX destroy the game object when it is done playing.
+			if (soundClip.IsSFX) { Destroy(clipGameObject, audioSource.clip.length + 0.1f); }
 
-        private IEnumerator PlayAlarmSequence(int hundred, int one)
-        {
-            AudioSource beep;
+			// Return audio source.
+			return audioSource;
+		}
 
-            // Play as many alarm beeps as specified in the alarm as hundred for the first number.
-            for (var i = 0; i < hundred; i++)
-            {
-                beep = Play("Alarm Beep");
-                yield return new WaitForSeconds(beep.clip.length);
-            }
 
-            // Wait another half a second before section of the alarm is played so the total wait time is 1 second.
-            yield return new WaitForSeconds(TIME_BETWEEN_ALARM_SECTIONS);
+		/// <summary>
+		///     This <c>coroutine</c> is used to play an alarm sequence. It makes sure there is enough time between the alarm beeps.
+		/// </summary>
+		/// <param name="hundred"><c>int</c> between 1 and 3 for the hundred in the number.</param>
+		/// <param name="one"><c>int</c> between 1 and 3 for the one in the number.</param>
+		private IEnumerator PlayAlarmSequence(int hundred, int one)
+		{
+			IsAlarmSequencePlaying = true;
 
-            beep = Play("Alarm Beep");
+			AudioSource beep;
 
-            // Wait for the next alarm section.
-            yield return new WaitForSeconds(beep.clip.length + TIME_BETWEEN_ALARM_SECTIONS);
+			// Play as many alarm beeps as specified in the alarm as hundred for the first number.
+			for (var i = 0; i < hundred; i++)
+			{
+				beep = Play("Alarm Beep");
+				yield return new WaitForSeconds(beep.clip.length);
+			}
 
-            // Play as many alarm beeps as specified in the alarm as One for the last number.
-            for (var i = 0; i < one; i++)
-            {
-                beep = Play("Alarm Beep");
-                yield return new WaitForSeconds(beep.clip.length);
-            }
+			// Wait another half a second before section of the alarm is played so the total wait time is 1 second.
+			yield return new WaitForSeconds(TIME_BETWEEN_ALARM_SECTIONS);
 
-            AlarmSequenceDoneEvent?.Invoke();
-        }
-    }
+			beep = Play("Alarm Beep");
+
+			// Wait for the next alarm section.
+			yield return new WaitForSeconds(beep.clip.length + TIME_BETWEEN_ALARM_SECTIONS);
+
+			// Play as many alarm beeps as specified in the alarm as One for the last number.
+			for (var i = 0; i < one; i++)
+			{
+				beep = Play("Alarm Beep");
+				yield return new WaitForSeconds(beep.clip.length);
+			}
+
+			IsAlarmSequencePlaying = false;
+			AlarmSequenceDoneEvent?.Invoke();
+		}
+	}
 }
