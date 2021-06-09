@@ -1,10 +1,10 @@
 ﻿using MBevers;
 
-namespace VeiligWerken.Prototyping
+namespace VeiligWerken.AlarmEditor
 {
 	/// <summary>
 	///     <para>
-	///         Created by: Mathias on 6/5/2021 3:31:06 PM.
+	///         Created by: Mathias on 6/5/2021.
 	///     </para>
 	/// </summary>
 	public class Alarm

@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using VeiligWerken;
-using VeiligWerken.Prototyping;
+using VeiligWerken.AlarmEditor;
 
-namespace Prototyping
+namespace VeiligWerken.Prototyping
 {
 #if UNITY_EDITOR
 	public class DeveloperShortcuts : MonoBehaviour
@@ -22,12 +20,6 @@ namespace Prototyping
 			{
 				AudioManager.Instance.StopAllCoroutines();
 				AudioManager.Instance.AlarmSequenceDoneEvent.Invoke();
-			}
-
-			if (GUI.Button(new Rect(new Vector2(10, Screen.height - buttonSize.y * 2.2f - buttonSize.y), buttonSize), "Load json"))
-			{
-				var alarms = JSONManager.Instance.ReadFromJSON<Dictionary<string, Alarm>>(Application.persistentDataPath + @"\alarms.json");
-				foreach (KeyValuePair<string, Alarm> kvp in alarms) { Debug.Log($"{kvp.Key}: {kvp.Value}"); }
 			}
 		}
 	}

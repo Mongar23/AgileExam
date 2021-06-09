@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Veilig Werken/2. Scenes/Game.unity
     guid: 2f31b78c0bbfb614fbe6e8c060a680b2
+  - enabled: 1
+    path: Assets/Veilig Werken/2. Scenes/AlarmEditor.unity
+    guid: fa41d41f22f0b1d4fb3bff18a85a6d7e
   m_configObjects: {}
