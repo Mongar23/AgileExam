@@ -11,6 +11,7 @@ namespace VeiligWerken
     {
         public GameObject PlayerPrefab { get; private set; }
         public GameObject AnswerUIPrefab { get; private set; }
+        public GameObject ExistingAlarmUIPrefab { get; private set; }
 
         protected override void Awake()
         {
@@ -18,6 +19,7 @@ namespace VeiligWerken
 
             PlayerPrefab = Resources.Load<GameObject>("Player");
             AnswerUIPrefab = Resources.Load<GameObject>("AnswerUI");
-        }
+            ExistingAlarmUIPrefab = Resources.Load<GameObject>("ExistingAlarmUI");
+		}
     }
 }

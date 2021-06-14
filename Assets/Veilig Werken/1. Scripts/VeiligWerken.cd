@@ -1,81 +1,153 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="FollowingCamera">
-    <Position X="6.75" Y="0.5" Width="2.25" />
+    <Position X="0.5" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAACEAAAAiIAAAAACAAAIAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACEAAAAgIAIAAACAAAIAAAAAAIAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Assets\Veilig Werken\1. Scripts\Game\FollowingCamera.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VeiligWerken.AudioManager">
-    <Position X="0.5" Y="0.5" Width="2.75" />
+  <Class Name="MainMenu">
+    <Position X="5.25" Y="5.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAAAAQAAgAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <HashCode>EAAAgAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Game\Menus\MainMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeiligWerken.AudioManager">
+    <Position X="10.75" Y="8.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAIQAIgAAAAAAAAAAgAAAAAAAAEQ=</HashCode>
       <FileName>Assets\Veilig Werken\1. Scripts\Game\Managers\AudioManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VeiligWerken.GameManager">
-    <Position X="0.5" Y="2.75" Width="2.5" />
+    <Position X="7.75" Y="4.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAgAAQAAAEA=</HashCode>
+      <HashCode>AAAAAAAIACQAAAAAAAAEAAAIAAAAUAAIAAgAAQAAAEA=</HashCode>
       <FileName>Assets\Veilig Werken\1. Scripts\Game\Managers\GameManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VeiligWerken.ResourceManager">
-    <Position X="10.5" Y="3.5" Width="2.75" />
+    <Position X="3" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAgAAAAAEA=</HashCode>
       <FileName>Assets\Veilig Werken\1. Scripts\Game\Managers\ResourceManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VeiligWerken.Player">
-    <Position X="3.5" Y="2" Width="1.75" />
+    <Position X="0.5" Y="12.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Veilig Werken\1. Scripts\Game\Player.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VeiligWerken.PlayerMovement">
-    <Position X="3.25" Y="3.5" Width="2.25" />
+    <Position X="10.75" Y="4" Width="2.25" />
     <TypeIdentifier>
       <HashCode>BAQAQAAAIiAAAABgAAAAAAAAAAAAABIIAAAQAAAAAAA=</HashCode>
       <FileName>Assets\Veilig Werken\1. Scripts\Game\PlayerMovement.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VeiligWerken.Shelter">
-    <Position X="3.5" Y="0.5" Width="3" />
+  <Class Name="VeiligWerken.QuizAnswerUI" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="3.75" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAgAAAQAAAAAAAAAAAAAAAgAAAAAAEAAAAAA=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Game\QuizAnswerUI.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="VeiligWerken.Shelter">
+    <Position X="5.5" Y="12.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAgAAA=</HashCode>
       <FileName>Assets\Veilig Werken\1. Scripts\Game\Shelter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VeiligWerken.Menus.FinishedMenu">
-    <Position X="5.75" Y="3.5" Width="2" />
+    <Position X="0.5" Y="6.25" Width="4.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACEAgAAAAAAAAAAAAAAAAAAAAAAQgAAAAAA=</HashCode>
+      <HashCode>IAAAAAAAACEAgAAAAAAAAAAAAAAEAAAAAAAQgAAAAAI=</HashCode>
       <FileName>Assets\Veilig Werken\1. Scripts\Game\Menus\FinishedMenu.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VeiligWerken.Menus.FloorPlanMenu">
-    <Position X="9.25" Y="0.5" Width="2.75" />
+    <Position X="11.5" Y="0.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAACACAAgAAAAAAgAAAAAAAIAAAAAAACgAAAAAE=</HashCode>
+      <HashCode>AAQAAAACACAAgAAAAAAgAAAAAAAIAAAAAAACgAAAAAE=</HashCode>
       <FileName>Assets\Veilig Werken\1. Scripts\Game\Menus\FloorPlanMenu.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VeiligWerken.Menus.PlayerHUDMenu">
-    <Position X="0.5" Y="5.25" Width="2.5" />
+    <Position X="2.5" Y="13" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAgAAAAAAAAAAAAAAAAAAAAAABgAAAAAA=</HashCode>
+      <HashCode>AAAQAAAAACAAgAAAAAAAAAAAAAAAEAAAAAABgAAAAAA=</HashCode>
       <FileName>Assets\Veilig Werken\1. Scripts\Game\Menus\PlayerHUDMenu.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="VeiligWerken.Menus.QuizMenu">
+    <Position X="6.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAAAAACAAgAAAAAAAEAAAIAAAAAAAAAACgAQACAA=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Game\Menus\QuizMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeiligWerken.PathFinding.AStar">
+    <Position X="2.5" Y="9.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAAgBAAQAAAAAAAAAAAACAAAAAAIAAAAAQAAAAAEA=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Game\PathFinding\AStar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeiligWerken.PathFinding.Node" BaseTypeListCollapsed="true">
+    <Position X="4.25" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAIAAAAgAQAAAAAQAAIAAAAAAAAAAAAAQIAAAA=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Game\PathFinding\Node.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="VeiligWerken.PathFinding.PathFindingGrid">
+    <Position X="8" Y="8.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAABAACcAAAIAAAAAAgCAAAAEAAACAhAACAAAIgA=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Game\PathFinding\PathFindingGrid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeiligWerken.Tools.Heap&lt;T&gt;">
+    <Position X="9.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAQAAAACAAAAAAAAgAAAQAAAARCAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Tools\Heap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VeiligWerken.Tools.QuizQuestion">
+    <Position X="5.5" Y="9.5" Width="2.25" />
+    <NestedTypes>
+      <Struct Name="VeiligWerken.Tools.QuizQuestion.QuizAnswer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Veilig Werken\1. Scripts\Tools\QuizQuestion.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAARAAAAEQAAAAAAAAAg=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Tools\QuizQuestion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="VeiligWerken.Tools.SoundClip">
-    <Position X="8" Y="3.5" Width="2.25" />
+    <Position X="0.5" Y="9.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAEAAAABAAQAAAAEgAAAAIIAAAACAAA=</HashCode>
       <FileName>Assets\Veilig Werken\1. Scripts\Tools\SoundClip.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Interface Name="VeiligWerken.Tools.IHeapItem&lt;T&gt;">
+    <Position X="5.25" Y="8" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Veilig Werken\1. Scripts\Tools\IHeapItem.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

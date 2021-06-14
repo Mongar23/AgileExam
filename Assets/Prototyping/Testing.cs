@@ -1,21 +1,21 @@
-using System;
 using MBevers;
+using TMPro;
 using UnityEngine;
 
 namespace Prototyping
 {
-    public class Testing : ExtendedMonoBehaviour
-    {
-        [SerializeField, Range(0.0f, 360.0f)] private float direction;
-        [SerializeField] private RectTransform arrow;
+	public class Testing : ExtendedMonoBehaviour
+	{
+		[SerializeField] private TextMeshProUGUI text;
+		[SerializeField] private Color color;
+		private string textValue;
 
-        private void Update()
-        {
-            float directionInRad = (direction + 180.0f) * Mathf.Deg2Rad;
-            var windDirection = new Vector2(Mathf.Sin(directionInRad), Mathf.Cos(directionInRad));
-            
-            arrow.rotation = Quaternion.Euler(0, 0, -direction);
-            Debug.DrawRay(arrow.pivot, windDirection * 10.0f, Color.magenta);
-        }
-    }
+		private void OnValidate()
+		{
+			if (text == null) { return; }
+
+			textValue = $"Color: #{ColorUtility.ToHtmlStringRGB(color).Color(color)}\n r:{color.r}, g:{color.g}, b:{color.b}, a:{color.a}";
+			text.SetText(textValue);
+		}
+	}
 }

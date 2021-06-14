@@ -1,27 +1,21 @@
-﻿using VeiligWerken;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using VeiligWerken.AlarmEditor;
 
-namespace Prototyping
+namespace VeiligWerken.Prototyping
 {
 #if UNITY_EDITOR
-    public class DeveloperShortcuts : MonoBehaviour
-    {
-        private readonly Vector2 buttonSize = new Vector2(150, 25);
+	public class DeveloperShortcuts : MonoBehaviour
+	{
+		private readonly Vector2 buttonSize = new Vector2(150, 25);
 
-        private void OnGUI()
-        {
-            if(GUI.Button(new Rect(new Vector2(10, Screen.height - buttonSize.y * 0.1f - buttonSize.y), buttonSize), "Reload scene"))
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
-            
-            if(GUI.Button(new Rect(new Vector2(10, Screen.height - buttonSize.y * 1.15f - buttonSize.y), buttonSize), "Skip alarm"))
-            {
-                AudioManager.Instance.StopAllCoroutines();
-                AudioManager.Instance.AlarmSequenceDoneEvent.Invoke();
-            }
-        }
-    }
+		private void OnGUI()
+		{
+			if (GUI.Button(new Rect(new Vector2(10, Screen.height - buttonSize.y * 0.1f - buttonSize.y), buttonSize), "Reload scene"))
+			{
+				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+			}
+		}
+	}
 #endif
 }
