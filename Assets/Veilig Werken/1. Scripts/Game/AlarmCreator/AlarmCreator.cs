@@ -18,6 +18,7 @@ namespace VeiligWerken.AlarmEditor
 	public class AlarmCreator : Singleton<AlarmCreator>
 	{
 		private Button saveButton = null;
+		private Button previewButton = null;
 		private Dictionary<string, Alarm> alarms;
 		private string savePath = string.Empty;
 		private TMP_Dropdown typeDropdown = null;
@@ -42,59 +43,56 @@ namespace VeiligWerken.AlarmEditor
 
 			// Get UI components.
 			typeDropdown = GetComponentInChildren<TMP_Dropdown>();
-			saveButton = CachedTransform.Find("SaveButton").GetComponent<Button>();
+			previewButton = CachedTransform.Find("PreviewButton").GetComponent<Button>();
+			saveButton = CachedTransform.Find("CreateAlarmButton").GetComponent<Button>();
 			oneInputField = CachedTransform.Find("OneInputField").GetComponent<TMP_InputField>();
 			nameInputField = CachedTransform.Find("NameInputField").GetComponent<TMP_InputField>();
 			hundredInputField = CachedTransform.Find("HundredInputField").GetComponent<TMP_InputField>();
 
-			// Validate input when apply button is clicked. 
-			saveButton.onClick.AddListener(ValidateInput);
+			// Add listeners to the button's onClick
+			saveButton.onClick.AddListener(SaveAlarm);
+			previewButton.onClick.AddListener(PreviewAlarm);
 
 			//Update alarms view.
 			AlarmViewer.Instance.UpdateAlarmView(alarms);
 		}
 
-		private void ValidateInput()
+		public void Clear()
 		{
-			if (string.IsNullOrEmpty(nameInputField.text))
-			{
-				StartCoroutine(AlarmEditorGeneralUI.Instance.InfoMessageCoroutine("Name has to be filled in.".Color(Color.red)));
-				return;
-			}
-
-			// Get the value of the name input field as an string.
-			string alarmName = nameInputField.text;
-
-			if (string.IsNullOrEmpty(hundredInputField.text))
-			{
-				StartCoroutine(AlarmEditorGeneralUI.Instance.InfoMessageCoroutine("Hundred has to be filled in.".Color(Color.red)));
-				return;
-			}
-
-			// Get the value of the hundred input field as an int.
-			int hundred = int.Parse(hundredInputField.text);
-
-			if (string.IsNullOrEmpty(oneInputField.text))
-			{
-				StartCoroutine(AlarmEditorGeneralUI.Instance.InfoMessageCoroutine("One has to be filled in.".Color(Color.red)));
-				return;
-			}
-
-			// Get the value of the one input field as an int.
-			int one = int.Parse(oneInputField.text);
-
-			// Get the drop-down's int value as the alarm type.
-			var type = (Alarm.AlarmType) typeDropdown.value;
-
-			// Create a new alarm and update or add it to the alarms set.
-			var alarm = new Alarm(hundred, one, type);
-			if (alarms.ContainsKey(alarmName)) { alarms[alarmName] = alarm; }
-			else { alarms.Add(alarmName, alarm); }
-
-			SaveToJSON();
+			alarms = new Dictionary<string, Alarm>();
+			WriteToJSON();
 		}
 
-		private void SaveToJSON()
+		private void SaveAlarm()
+		{
+			(string, Alarm)? alarmTuple = CreateAlarm();
+
+			if (alarmTuple == null) { return; }
+
+			if (alarms.ContainsKey(alarmTuple.Value.Item1)) { alarms[alarmTuple.Value.Item1] = alarmTuple.Value.Item2; }
+			else { alarms.Add(alarmTuple.Value.Item1, alarmTuple.Value.Item2); }
+
+			WriteToJSON();
+		}
+
+		private void PreviewAlarm()
+		{
+			(string, Alarm)? alarmTuple = CreateAlarm();
+			if (alarmTuple == null) { return; }
+
+			Alarm alarm = alarmTuple.Value.Item2;
+			AudioManager.Instance.AlarmSequenceDoneEvent += OnAlarmSequenceDone;
+			previewButton.interactable = false;
+			StartCoroutine(AudioManager.Instance.PlayAlarmSequence(alarm));
+		}
+
+		private void OnAlarmSequenceDone()
+		{
+			AudioManager.Instance.AlarmSequenceDoneEvent -= OnAlarmSequenceDone;
+			previewButton.interactable = true;
+		}
+
+		private void WriteToJSON()
 		{
 			try
 			{
@@ -111,12 +109,42 @@ namespace VeiligWerken.AlarmEditor
 			}
 		}
 
-		public void Clear()
+		private (string, Alarm)? CreateAlarm()
 		{
-			alarms = new Dictionary<string, Alarm>();
-			SaveToJSON();
-		}
+			if (string.IsNullOrEmpty(nameInputField.text))
+			{
+				StartCoroutine(AlarmEditorGeneralUI.Instance.InfoMessageCoroutine("Name has to be filled in.".Color(Color.red)));
+				return null;
+			}
 
+			// Get the value of the name input field as an string.
+			string alarmName = nameInputField.text;
+
+			if (string.IsNullOrEmpty(hundredInputField.text))
+			{
+				StartCoroutine(AlarmEditorGeneralUI.Instance.InfoMessageCoroutine("Hundred has to be filled in.".Color(Color.red)));
+				return null;
+			}
+
+			// Get the value of the hundred input field as an int.
+			int hundred = int.Parse(hundredInputField.text);
+
+			if (string.IsNullOrEmpty(oneInputField.text))
+			{
+				StartCoroutine(AlarmEditorGeneralUI.Instance.InfoMessageCoroutine("One has to be filled in.".Color(Color.red)));
+				return null;
+			}
+
+			// Get the value of the one input field as an int.
+			int one = int.Parse(oneInputField.text);
+
+			// Get the drop-down's int value as the alarm type.
+			var type = (Alarm.AlarmType) typeDropdown.value;
+
+			// Create a new alarm and update or add it to the alarms set.
+			var alarm = new Alarm(hundred, one, type);
+			return (alarmName, alarm);
+		}
 
 		private void ClearFields()
 		{

@@ -2,6 +2,7 @@
 using MBevers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace VeiligWerken.AlarmEditor
@@ -25,6 +26,8 @@ namespace VeiligWerken.AlarmEditor
 
 			infoText = CachedTransform.Find("InfoText").GetComponent<TextMeshProUGUI>();
 			infoText.SetText(string.Empty);
+
+			CachedTransform.Find("BackButton").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene(0));
 		}
 
 		public IEnumerator InfoMessageCoroutine(string message)
