@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using MBevers;
 using UnityEngine;
@@ -131,11 +132,20 @@ namespace VeiligWerken
 		{
 			if (scene.buildIndex != 1) { return; }
 
-			loadedAlarms = JSONHandler.ReadFromJSON<Dictionary<string, Alarm>>(Application.persistentDataPath + @"\alarms.json") ??
-			               new Dictionary<string, Alarm>();
+			try
+			{
+				loadedAlarms = JSONHandler.ReadFromJSON<Dictionary<string, Alarm>>(Application.persistentDataPath + @"\alarms.json") ??
+				               new Dictionary<string, Alarm>();
 
-			Alarm randomAlarm = loadedAlarms.RandomValue();
-			StartCoroutine(PlayAlarmSequence(randomAlarm));
+				Alarm randomAlarm = loadedAlarms.RandomValue();
+				StartCoroutine(PlayAlarmSequence(randomAlarm));
+			}
+			catch (FileNotFoundException exception)
+			{
+				loadedAlarms = new Dictionary<string, Alarm>();
+				StartCoroutine(PlayAlarmSequence(new Alarm(2, 1, Alarm.AlarmType.Horns)));
+				Debug.LogError(exception);
+			}
 		}
 
 		public event Action AlarmSequenceDoneEvent;

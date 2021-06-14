@@ -810,7 +810,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &440525908
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1887,7 +1887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1115491390
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2143,7 +2143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1251918104
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4256,14 +4256,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 886111390}
     m_Modifications:
-    - target: {fileID: 2166036076536362449, guid: 8fd79b3f48c685c42aed02020b832e65, type: 3}
-      propertyPath: m_Points.m_Paths.Array.data[103].Array.data[5].x
-      value: 0.32420063
-      objectReference: {fileID: 0}
-    - target: {fileID: 2166036076536362449, guid: 8fd79b3f48c685c42aed02020b832e65, type: 3}
-      propertyPath: m_Points.m_Paths.Array.data[103].Array.data[5].y
-      value: 3.3844986
-      objectReference: {fileID: 0}
     - target: {fileID: 6093193059457988716, guid: 8fd79b3f48c685c42aed02020b832e65, type: 3}
       propertyPath: m_Name
       value: Map_Terrain

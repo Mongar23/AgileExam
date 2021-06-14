@@ -52,8 +52,7 @@ namespace VeiligWerken.Menus
 		{
 			bool hasPassedTest = isCorrectShelter && GameManager.Instance.CorrectAnsweredQuestions >= CORRECT_ANSWERS_THRESHOLD;
 
-			var shelterResult = 
-				$"You have reached the {(isCorrectShelter ? "correct".Color("#DCFFDC") : "incorrect".Color("#FFDCDC"))} shelter. ";
+			var shelterResult = $"You have reached the {(isCorrectShelter ? "correct".Color("#DCFFDC") : "incorrect".Color("#FFDCDC"))} shelter. ";
 			var questionsResult = $"You have answered {GameManager.Instance.CorrectAnsweredQuestions.ToString().Bold()} correctly.";
 			var overallResult = $"\n\nYou have {(hasPassedTest ? "passed".Color(Color.green) : "failed".Color(Color.red))} the test.";
 
