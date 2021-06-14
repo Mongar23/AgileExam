@@ -1,18 +1,20 @@
 {
   "dependencies": {
     "com.mbevers.core": {
-      "version": "file:E:/MyFramework/Packages/MBevers-Core",
+      "version": "https://github.com/Mongar23/mbevers-core.git",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "cc303f7f093ad364d2a3da577c04e20a3358cc67"
     },
     "com.mbevers.menus": {
-      "version": "file:E:/MyFramework/Packages/MBevers-Menus",
+      "version": "https://github.com/Mongar23/mbevers-menus.git",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.mbevers.core": "0.1.0"
-      }
+      },
+      "hash": "27c589a0156dbe144690bfc617889edd7454ed68"
     },
     "com.prastiwar.unityserializeddictionary": {
       "version": "https://github.com/Prastiwar/UnitySerializedDictionary.git",
