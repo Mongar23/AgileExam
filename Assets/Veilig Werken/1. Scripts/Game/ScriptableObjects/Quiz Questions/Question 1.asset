@@ -20,5 +20,5 @@ MonoBehaviour:
   - isRightAnswer: 0
     answer: The incident is over you can continue working.
   - isRightAnswer: 1
-    answer: A local incident, if the you are not in the building of the incident
-      you can keep working.
+    answer: A local incident, if you are not in the building of the incident you
+      can keep working.

@@ -137,8 +137,8 @@ namespace VeiligWerken
 				loadedAlarms = JSONHandler.ReadFromJSON<Dictionary<string, Alarm>>(Application.persistentDataPath + @"\alarms.json") ??
 				               new Dictionary<string, Alarm>();
 
-				Alarm randomAlarm = loadedAlarms.RandomValue();
-				StartCoroutine(PlayAlarmSequence(randomAlarm));
+				Alarm alarm = loadedAlarms.Count > 0 ? loadedAlarms.RandomValue() : new Alarm(2, 1, Alarm.AlarmType.Horns);
+				StartCoroutine(PlayAlarmSequence(alarm));
 			}
 			catch (FileNotFoundException exception)
 			{
